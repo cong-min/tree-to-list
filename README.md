@@ -1,5 +1,8 @@
 # tree-to-list
 
+[![npm](https://img.shields.io/npm/v/tree-to-list)](https://www.npmjs.com/package/tree-to-list)
+[![download](https://img.shields.io/npm/dt/tree-to-list)](https://www.npmjs.com/package/tree-to-list)
+
 > Flatten tree to list
 
 

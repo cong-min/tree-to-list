@@ -1,0 +1,49 @@
+{
+  "name": "tree-to-list",
+  "version": "1.0.0",
+  "description": "Flatten tree to list",
+  "main": "dist/treeToList.js",
+  "module": "dist/treeToList.esm.js",
+  "scripts": {
+    "start": "npm run build",
+    "build": "rollup -c",
+    "test": "npm run build && jest",
+    "lint": "eslint --fix \"**/*.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mcc108/tree-to-list.git"
+  },
+  "author": "Cong Min",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcc108/tree-to-list/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "eslint": "^6.8.0",
+    "eslint-config-soda-works": "^1.2.0",
+    "husky": "^4.2.3",
+    "jest": "^25.1.0",
+    "lint-staged": "^10.0.8",
+    "lodash": "^4.17.15",
+    "rollup": "^2.0.6",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-cleanup": "^3.1.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}

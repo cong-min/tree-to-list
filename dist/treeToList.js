@@ -95,13 +95,19 @@ function _objectSpread2(target) {
  *       node3: {
  *         name: 'name3',
  *         tree: {
- *           node5: { name: 'name5' }
+ *           node2: {
+ *             name: 'name5',
+ *             key5: 'value5'
+ *           }
  *         }
  *       },
  *       node4: { name: 'name4' },
  *     }
  *   },
- *   node2: { name: 'name2' }
+ *   node2: {
+ *     name: 'name2',
+ *     key2: 'value2'
+ *   }
  * }
  *
  * treeToList(tree, 'tree')
@@ -109,9 +115,12 @@ function _objectSpread2(target) {
  * {
  *   node1: { name: 'name1' },
  *   node3: { name: 'name3' },
- *   node5: { name: 'name5' },
  *   node4: { name: 'name4' },
- *   node2: { name: 'name2' }
+ *   node2: {
+ *     name: 'name2',
+ *     key5: 'value5',
+ *     key2: 'value2'
+ *   }
  * }
  *
  */
@@ -165,7 +174,7 @@ function objectTreeToList(tree) {
     var item = _objectSpread2({}, node);
 
     delete item[key];
-    list[nodeKey] = item;
+    list[nodeKey] = _objectSpread2({}, list[nodeKey], {}, item);
     return Object.assign(list, treeToList(node[key], key));
   }, {});
 }

@@ -39,13 +39,19 @@
  *       node3: {
  *         name: 'name3',
  *         tree: {
- *           node5: { name: 'name5' }
+ *           node2: {
+ *             name: 'name5',
+ *             key5: 'value5'
+ *           }
  *         }
  *       },
  *       node4: { name: 'name4' },
  *     }
  *   },
- *   node2: { name: 'name2' }
+ *   node2: {
+ *     name: 'name2',
+ *     key2: 'value2'
+ *   }
  * }
  *
  * treeToList(tree, 'tree')
@@ -53,9 +59,12 @@
  * {
  *   node1: { name: 'name1' },
  *   node3: { name: 'name3' },
- *   node5: { name: 'name5' },
  *   node4: { name: 'name4' },
- *   node2: { name: 'name2' }
+ *   node2: {
+ *     name: 'name2',
+ *     key5: 'value5',
+ *     key2: 'value2'
+ *   }
  * }
  *
  */
@@ -103,7 +112,10 @@ function objectTreeToList(tree, key = 'children') {
         const item = { ...node };
         delete item[key];
 
-        list[nodeKey] = item;
+        list[nodeKey] = {
+            ...list[nodeKey],
+            ...item
+        };
 
         return Object.assign(list, treeToList(node[key], key));
     }, {});

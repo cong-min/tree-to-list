@@ -52,13 +52,19 @@ const objectTree = {
             node3: {
                 name: 'name3',
                 tree: {
-                    node5: { name: 'name5' }
+                    node2: {
+                        name: 'name5',
+                        key5: 'value5'
+                    }
                 }
             },
             node4: { name: 'name4' },
         }
     },
-    node2: { name: 'name2' }
+    node2: {
+        name: 'name2',
+        key2: 'value2'
+    }
 };
 
 console.log(treeToList(objectTree, 'tree'));
@@ -66,9 +72,12 @@ console.log(treeToList(objectTree, 'tree'));
 {
     node1: { name: 'name1' },
     node3: { name: 'name3' },
-    node5: { name: 'name5' },
     node4: { name: 'name4' },
-    node2: { name: 'name2' }
+    node2: {
+        name: 'name2',
+        key5: 'value5',
+        key2: 'value2'
+    }
 }
 */
 ```

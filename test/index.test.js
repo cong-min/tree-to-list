@@ -37,13 +37,19 @@ test('flatten object tree', () => {
                 node3: {
                     name: 'name3',
                     tree: {
-                        node5: { name: 'name5' }
+                        node2: {
+                            name: 'name5',
+                            key5: 'value5'
+                        }
                     }
                 },
                 node4: { name: 'name4' },
             }
         },
-        node2: { name: 'name2' }
+        node2: {
+            name: 'name2',
+            key2: 'value2'
+        }
     };
     const objectTreeClone = cloneDeep(objectTree);
 
@@ -52,9 +58,12 @@ test('flatten object tree', () => {
     expect(list).toEqual({
         node1: { name: 'name1' },
         node3: { name: 'name3' },
-        node5: { name: 'name5' },
         node4: { name: 'name4' },
-        node2: { name: 'name2' }
+        node2: {
+            name: 'name2',
+            key5: 'value5',
+            key2: 'value2'
+        }
     });
     expect(objectTree).toEqual(objectTreeClone);
 });

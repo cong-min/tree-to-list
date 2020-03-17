@@ -1,3 +1,4 @@
+const cloneDeep = require('lodash/cloneDeep')
 const treeToList = require('../dist/treeToList')
 
 test('flatten array tree', () => {
@@ -14,6 +15,7 @@ test('flatten array tree', () => {
     }, {
         name: 'name2'
     }];
+    const arrayTreeClone = cloneDeep(arrayTree);
 
     const list = treeToList(arrayTree);
 
@@ -24,6 +26,7 @@ test('flatten array tree', () => {
         { name: 'name4' },
         { name: 'name2' }
     ]);
+    expect(arrayTree).toEqual(arrayTreeClone);
 });
 
 test('flatten object tree', () => {
@@ -42,6 +45,7 @@ test('flatten object tree', () => {
         },
         node2: { name: 'name2' }
     };
+    const objectTreeClone = cloneDeep(objectTree);
 
     const list = treeToList(objectTree, 'tree');
 
@@ -52,6 +56,7 @@ test('flatten object tree', () => {
         node4: { name: 'name4' },
         node2: { name: 'name2' }
     });
+    expect(objectTree).toEqual(objectTreeClone);
 });
 
 test('flatten invalid tree', () => {

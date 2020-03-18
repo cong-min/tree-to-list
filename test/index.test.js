@@ -17,9 +17,9 @@ test('flatten array tree', () => {
     }];
     const arrayTreeClone = cloneDeep(arrayTree);
 
-    const list = treeToList(arrayTree);
-
-    expect(list).toEqual([
+    expect(
+        treeToList(arrayTree)
+    ).toEqual([
         { name: 'name1' },
         { name: 'name3' },
         { name: 'name5' },
@@ -53,9 +53,9 @@ test('flatten object tree', () => {
     };
     const objectTreeClone = cloneDeep(objectTree);
 
-    const list = treeToList(objectTree, 'tree');
-
-    expect(list).toEqual({
+    expect(
+        treeToList(objectTree, 'tree')
+    ).toEqual({
         node1: { name: 'name1' },
         node3: { name: 'name3' },
         node4: { name: 'name4' },
@@ -68,10 +68,32 @@ test('flatten object tree', () => {
     expect(objectTree).toEqual(objectTreeClone);
 });
 
+test('flatten null node', () => {
+    const tree = [{
+        name: 'name1',
+        children: [{
+            name: 'name3',
+            children: null
+        }, null]
+    }, {
+        name: 'name2'
+    }];
+    const treeClone = cloneDeep(tree);
+
+    expect(
+        treeToList(tree)
+    ).toEqual([
+        { name: 'name1' },
+        { name: "name3" },
+        { name: 'name2' },
+    ]);
+    expect(tree).toEqual(treeClone);
+});
+
 test('flatten invalid tree', () => {
     const invalidTree = 'tree';
 
-    const list = treeToList(invalidTree);
-
-    expect(list).toEqual([]);
+    expect(
+        treeToList(invalidTree)
+    ).toEqual([]);
 });

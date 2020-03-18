@@ -168,9 +168,11 @@ function arrayTreeToList(tree) {
   return tree.reduce(function (list, node) {
     var item = _objectSpread2({}, node);
 
+    var subTree = item[key];
     delete item[key];
-    list.push(item);
-    return list.concat(treeToList(node[key], key));
+    if (node) list.push(item);
+    var subList = treeToList(subTree, key);
+    return list.concat(subList);
   }, []);
 }
 /**
@@ -185,13 +187,13 @@ function arrayTreeToList(tree) {
 function objectTreeToList(tree) {
   var key = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'children';
   return Object.keys(tree).reduce(function (list, nodeKey) {
-    var node = tree[nodeKey];
+    var item = _objectSpread2({}, tree[nodeKey]);
 
-    var item = _objectSpread2({}, node);
-
+    var subTree = item[key];
     delete item[key];
     list[nodeKey] = _objectSpread2({}, list[nodeKey], {}, item);
-    return _extends(list, treeToList(node[key], key));
+    var subList = treeToList(subTree, key);
+    return _extends(list, subList);
   }, {});
 }
 

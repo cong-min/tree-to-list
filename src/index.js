@@ -91,11 +91,13 @@ function treeToList(tree, key = 'children') {
 function arrayTreeToList(tree, key = 'children') {
     return tree.reduce((list, node) => {
         const item = { ...node };
+        const subTree = item[key];
         delete item[key];
 
-        list.push(item);
+        if (node) list.push(item);
 
-        return list.concat(treeToList(node[key], key));
+        const subList = treeToList(subTree, key);
+        return list.concat(subList);
     }, []);
 }
 
@@ -108,8 +110,8 @@ function arrayTreeToList(tree, key = 'children') {
  * */
 function objectTreeToList(tree, key = 'children') {
     return Object.keys(tree).reduce((list, nodeKey) => {
-        const node = tree[nodeKey];
-        const item = { ...node };
+        const item = { ...tree[nodeKey] };
+        const subTree = item[key];
         delete item[key];
 
         list[nodeKey] = {
@@ -117,7 +119,8 @@ function objectTreeToList(tree, key = 'children') {
             ...item
         };
 
-        return Object.assign(list, treeToList(node[key], key));
+        const subList = treeToList(subTree, key);
+        return Object.assign(list, subList);
     }, {});
 }
 

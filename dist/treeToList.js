@@ -20,6 +20,24 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -175,7 +193,7 @@ function objectTreeToList(tree) {
 
     delete item[key];
     list[nodeKey] = _objectSpread2({}, list[nodeKey], {}, item);
-    return Object.assign(list, treeToList(node[key], key));
+    return _extends(list, treeToList(node[key], key));
   }, {});
 }
 

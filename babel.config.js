@@ -3,5 +3,8 @@ module.exports = {
         ['@babel/env', {
             modules: false,
         }],
-    ]
+    ],
+    plugins: [
+        ['@babel/transform-object-assign'],
+    ],
 };

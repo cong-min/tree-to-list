@@ -1,4 +1,4 @@
-/** tree-to-list v1.0.0
+/** tree-to-list v1.0.1
  * - https://www.npmjs.com/package/tree-to-list
  * - https://github.com/mcc108/tree-to-list
  */

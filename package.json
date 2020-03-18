@@ -1,6 +1,6 @@
 {
   "name": "tree-to-list",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Flatten tree to list",
   "main": "dist/treeToList.js",
   "module": "dist/treeToList.esm.js",

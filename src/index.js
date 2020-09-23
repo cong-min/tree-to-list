@@ -69,59 +69,72 @@
  *
  */
 function treeToList(tree, key = 'children') {
-    if (Array.isArray(tree)) {
-        // array tree
-        return arrayTreeToList(tree, key);
-    } else if (Object.prototype.toString.call(tree) === '[object Object]') {
-        // object tree
-        return objectTreeToList(tree, key);
-    } else {
-        // invalid tree
-        return [];
+    let list = [];
+
+    if (Array.isArray(tree)) { // array tree
+        list = [];
+    } else if (Object.prototype.toString.call(tree) === '[object Object]') { // object tree
+        list = {};
+    } else { // invalid tree
+        return list;
     }
+
+    let stack = _transformStack(tree);
+
+    while (stack.length) {
+        const curStack = stack.shift();
+
+        const { key: nodeKey, value: node } = curStack;
+        if (!node) continue; // invalid node
+
+        const item = (nodeKey ? list[nodeKey] : {}) || {};
+        for (const prop in node) {
+            if (Object.prototype.hasOwnProperty.call(node, prop)
+                && prop !== key) {
+                item[prop] = node[prop];
+            }
+        }
+        if (nodeKey) { // object
+            list[nodeKey] = item;
+        } else { // array
+            list.push(item);
+        }
+
+        const subTree = node[key] || [];
+        stack = _transformStack(subTree).concat(stack);
+    }
+
+    return list;
 }
 
 /**
- * flatten array tree
+ * transform tree to stack
  *
- * @param {Array} tree Array tree.
- * @param {String} key Node key.
- * @returns {Array} Returns flattened array list.
- * */
-function arrayTreeToList(tree, key = 'children') {
-    return tree.reduce((list, node) => {
-        const item = { ...node };
-        const subTree = item[key];
-        delete item[key];
+ * @param {Array|Object} tree Tree.
+ */
+function _transformStack(tree) {
+    const stack = [];
 
-        if (node) list.push(item);
+    if (Array.isArray(tree)) { // array tree
+        for (let index = 0; index < tree.length; index++) {
+            const node = tree[index];
+            stack.push({
+                value: node,
+            });
+        }
+    } else if (Object.prototype.toString.call(tree) === '[object Object]') { // object tree
+        for (const key in tree) {
+            if (Object.prototype.hasOwnProperty.call(tree, key)) {
+                const node = tree[key];
+                stack.push({
+                    key,
+                    value: node,
+                });
+            }
+        }
+    }
 
-        const subList = treeToList(subTree, key);
-        return list.concat(subList);
-    }, []);
-}
-
-/**
- * flatten object tree
- *
- * @param {Object} tree Object tree.
- * @param {String} key Node key.
- * @returns {Object} Returns flattened object list.
- * */
-function objectTreeToList(tree, key = 'children') {
-    return Object.keys(tree).reduce((list, nodeKey) => {
-        const item = { ...tree[nodeKey] };
-        const subTree = item[key];
-        delete item[key];
-
-        list[nodeKey] = {
-            ...list[nodeKey],
-            ...item
-        };
-
-        const subList = treeToList(subTree, key);
-        return Object.assign(list, subList);
-    }, {});
+    return stack;
 }
 
 export default treeToList;

@@ -97,3 +97,23 @@ test('flatten invalid tree', () => {
         treeToList(invalidTree)
     ).toEqual([]);
 });
+
+test('maximum call stack size', () => {
+    const createData = (deep, breadth) => {
+        const data = {};
+        let temp = data;
+        for (let i = 0; i < deep; i++) {
+            temp = temp['children'] = {};
+            for (let j = 0; j < breadth; j++) {
+                temp[j] = j;
+            }
+        }
+        return data;
+    };
+
+    const data = createData(10000);
+
+    expect(() => {
+        treeToList(data);
+    }).not.toThrow('Maximum call stack size exceeded');
+});

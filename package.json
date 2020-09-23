@@ -1,6 +1,6 @@
 {
   "name": "tree-to-list",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Flatten tree to list",
   "main": "dist/treeToList.js",
   "module": "dist/treeToList.esm.js",
@@ -21,20 +21,20 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.8.7",
-    "@babel/plugin-transform-object-assign": "^7.8.3",
-    "@babel/preset-env": "^7.8.7",
-    "@rollup/plugin-commonjs": "^11.0.2",
-    "@rollup/plugin-node-resolve": "^7.1.1",
-    "eslint": "^6.8.0",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-object-assign": "^7.10.4",
+    "@babel/preset-env": "^7.11.5",
+    "@rollup/plugin-commonjs": "^15.1.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "eslint": "^7.9.0",
     "eslint-config-soda-works": "^1.2.0",
-    "husky": "^4.2.3",
-    "jest": "^25.1.0",
-    "lint-staged": "^10.0.8",
-    "lodash": "^4.17.15",
-    "rollup": "^2.0.6",
+    "husky": "^4.3.0",
+    "jest": "^26.4.2",
+    "lint-staged": "^10.4.0",
+    "lodash": "^4.17.20",
+    "rollup": "^2.28.1",
     "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-cleanup": "^3.1.1"
+    "rollup-plugin-cleanup": "^3.2.1"
   },
   "husky": {
     "hooks": {

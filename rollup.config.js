@@ -27,6 +27,7 @@ export default [{
         file: 'dist/treeToList.js',
         name: 'treeToList',
         banner,
+        exports: 'default',
     },
     plugins: [
         resolve(),

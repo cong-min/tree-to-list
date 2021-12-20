@@ -1,8 +1,3 @@
-interface TreeToList {
-  (tree: Record<string, any>, key?: string): Record<string, any>;
-  (tree: Record<string, any>[], key?: string): Record<string, any>[];
-}
-
 /**
  * transform tree to stack
  *
@@ -101,7 +96,7 @@ function transformStack(tree: Record<string, any> | Record<string, any>[]) {
  * }
  *
  */
-const treeToList: TreeToList = (tree, key = 'children') => {
+const treeToList = <T extends Record<string, any> | Record<string, any>[]>(tree: T, key: string = 'children'): T => {
   let list: any;
 
   if (Array.isArray(tree)) { // array tree

@@ -1,7 +1,3 @@
-interface TreeToList {
-    (tree: Record<string, any>, key?: string): Record<string, any>;
-    (tree: Record<string, any>[], key?: string): Record<string, any>[];
-}
 /** tree-to-list
  * flatten tree to list
  *
@@ -72,5 +68,5 @@ interface TreeToList {
  * }
  *
  */
-declare const treeToList: TreeToList;
+declare const treeToList: <T extends Record<string, any> | Record<string, any>[]>(tree: T, key?: string) => T;
 export default treeToList;

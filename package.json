@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/mcc108/tree-to-list.git"
+    "url": "git+ssh://git@github.com/cong-min/tree-to-list.git"
   },
   "author": "Cong Min",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mcc108/tree-to-list/issues"
+    "url": "https://github.com/cong-min/tree-to-list/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",

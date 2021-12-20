@@ -1,8 +1,31 @@
-/** tree-to-list v2.0.0
+/** tree-to-list v3.0.0
  * - https://www.npmjs.com/package/tree-to-list
  * - https://github.com/mcc108/tree-to-list
  */
 
+/**
+ * transform tree to stack
+ *
+ * @param {Array|Object} tree Tree.
+ */
+function transformStack(tree) {
+    var stack = [];
+    if (Array.isArray(tree)) { // array tree
+        stack = tree.map(function (node) { return ({
+            value: node
+        }); });
+    }
+    else if (Object.prototype.toString.call(tree) === '[object Object]') { // object tree
+        stack = Object.keys(tree).map(function (key) {
+            var node = tree[key];
+            return ({
+                key: key,
+                value: node
+            });
+        });
+    }
+    return stack;
+}
 /** tree-to-list
  * flatten tree to list
  *
@@ -73,83 +96,45 @@
  * }
  *
  */
-function treeToList(tree) {
-  var key = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'children';
-  var list = [];
-
-  if (Array.isArray(tree)) {
-    // array tree
-    list = [];
-  } else if (Object.prototype.toString.call(tree) === '[object Object]') {
-    // object tree
-    list = {};
-  } else {
-    // invalid tree
-    return list;
-  }
-
-  var stack = _transformStack(tree);
-
-  while (stack.length) {
-    var curStack = stack.shift();
-    var nodeKey = curStack.key,
-        node = curStack.value;
-    if (!node) continue; // invalid node
-
-    var item = (nodeKey ? list[nodeKey] : {}) || {};
-
-    for (var prop in node) {
-      if (Object.prototype.hasOwnProperty.call(node, prop) && prop !== key) {
-        item[prop] = node[prop];
-      }
+var treeToList = function (tree, key) {
+    if (key === void 0) { key = 'children'; }
+    var list;
+    if (Array.isArray(tree)) { // array tree
+        list = [];
     }
-
-    if (nodeKey) {
-      // object
-      list[nodeKey] = item;
-    } else {
-      // array
-      list.push(item);
+    else if (Object.prototype.toString.call(tree) === '[object Object]') { // object tree
+        list = {};
     }
-
-    var subTree = node[key] || [];
-    stack = _transformStack(subTree).concat(stack);
-  }
-
-  return list;
-}
-/**
- * transform tree to stack
- *
- * @param {Array|Object} tree Tree.
- */
-
-
-function _transformStack(tree) {
-  var stack = [];
-
-  if (Array.isArray(tree)) {
-    // array tree
-    for (var index = 0; index < tree.length; index++) {
-      var node = tree[index];
-      stack.push({
-        value: node
-      });
+    else { // invalid tree
+        list = [];
+        return list;
     }
-  } else if (Object.prototype.toString.call(tree) === '[object Object]') {
-    // object tree
-    for (var key in tree) {
-      if (Object.prototype.hasOwnProperty.call(tree, key)) {
-        var _node = tree[key];
-        stack.push({
-          key: key,
-          value: _node
+    var stack = transformStack(tree);
+    var _loop_1 = function () {
+        var curStack = stack.shift();
+        // eslint-disable-next-line no-continue
+        if (!curStack || !curStack.value)
+            return "continue"; // invalid node
+        var nodeKey = curStack.key, node = curStack.value;
+        var item = (nodeKey ? list[nodeKey] : {}) || {};
+        Object.keys(node).forEach(function (prop) {
+            if (prop !== key) {
+                item[prop] = node[prop];
+            }
         });
-      }
+        if (nodeKey) { // object
+            list[nodeKey] = item;
+        }
+        else { // array
+            list.push(item);
+        }
+        var subTree = node[key] || [];
+        stack = transformStack(subTree).concat(stack);
+    };
+    while (stack.length) {
+        _loop_1();
     }
-  }
+    return list;
+};
 
-  return stack;
-}
-
-export default treeToList;
+export { treeToList as default };

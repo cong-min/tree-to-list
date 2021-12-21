@@ -3,7 +3,7 @@ module.exports = {
     'airbnb-base',
   ],
   overrides: [
-    // ts
+    // src ts
     {
       files: ['**/*.ts'],
       extends: [
@@ -14,12 +14,19 @@ module.exports = {
         tsconfigRootDir: __dirname,
       },
     },
-    // test.js
+    // test
     {
-      files: ['test/*.js'],
+      files: ['test/*.{js,ts}'],
       plugins: ['jest'],
       env: {
         'jest/globals': true,
+      },
+      extends: [
+        'airbnb-typescript/base',
+      ],
+      parserOptions: {
+        project: './test/tsconfig.json',
+        tsconfigRootDir: __dirname,
       },
     },
   ],

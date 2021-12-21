@@ -99,8 +99,8 @@ test('flatten invalid tree', () => {
 });
 
 test('maximum call stack size', () => {
-  const createData = (deep, breadth) => {
-    const data = {};
+  const createData = (deep: number, breadth: number) => {
+    const data: any = {};
     let temp = data;
     for (let i = 0; i < deep; i++) {
       temp = {};
@@ -112,7 +112,7 @@ test('maximum call stack size', () => {
     return data;
   };
 
-  const data = createData(10000);
+  const data = createData(10000, 10000);
 
   expect(() => {
     treeToList(data);

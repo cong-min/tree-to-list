@@ -1,6 +1,6 @@
 {
   "name": "tree-to-list",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Flatten tree to list",
   "main": "dist/treeToList.js",
   "module": "dist/treeToList.esm.js",
@@ -21,12 +21,17 @@
   "bugs": {
     "url": "https://github.com/cong-min/tree-to-list/issues"
   },
+  "files": [
+    "src",
+    "dist"
+  ],
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/plugin-transform-object-assign": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.1.1",
+    "@types/jest": "^27.0.3",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
     "eslint": "^8.5.0",
@@ -41,6 +46,8 @@
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-cleanup": "^3.2.1",
     "rollup-plugin-typescript2": "^0.31.1",
+    "ts-jest": "^27.1.2",
+    "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
   },
   "lint-staged": {
@@ -48,5 +55,8 @@
       "eslint --fix",
       "git add"
     ]
+  },
+  "jest": {
+    "preset": "ts-jest"
   }
 }
